@@ -1,0 +1,8 @@
+Package: bipi
+Version: 0.1
+Maintainer: NateDimick <natedimick@gmail.com>
+Architecture: amd64
+Description: Big Picture Config Toggler
+  A tool to quickly switch system settings for big picture mode on a different display
+Priority: optional
+Section: utils

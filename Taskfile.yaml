@@ -1,0 +1,24 @@
+version: '3'
+
+tasks:
+  default:
+    cmds:
+      - echo "{{.GREETING}}"
+    silent: true
+
+  build:
+    cmds: 
+      - go build -o /deb/bipi/usr/bin -trimpath
+  
+  deb:
+    dir: deb
+    cmds:
+      - cp changelog changelog.Debian
+      - gzip --best -n changelog.Debian
+      - mv changelog.Debian.gz bipi/usr/share/doc/bipi/
+      - dpkg-deb --build bipi
+
+  deb-lint:
+    dir: deb
+    cmds:
+      - lintian bipi.deb

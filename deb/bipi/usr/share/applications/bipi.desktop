@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Bipi
+Comment=Tool for toggling Steam Big Picture System Config
+Exec=bipi
+Icon=bipi
+Terminal=False
+Type=Application
+Categories=Game;Settings;Utility;
+Keywords=steam;big;picture;toggle;
