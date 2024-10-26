@@ -8,10 +8,11 @@ tasks:
 
   build:
     cmds: 
-      - go build -o /deb/bipi/usr/bin -trimpath
+      - go build -o deb/bipi/usr/bin -trimpath
   
   deb:
     dir: deb
+    deps: [build]
     cmds:
       - cp changelog changelog.Debian
       - gzip --best -n changelog.Debian

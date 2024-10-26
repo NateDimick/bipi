@@ -8,19 +8,23 @@ import (
 	"time"
 )
 
+// note about pacmd - it was replaced in ubuntu 24.04. (pipewire vs pulseaudio)
+
 func BigPictureMode() error {
 	commands := []string{
 		"xrandr --output HDMI-A-0 --mode 1920x1080",
 		"xrandr --output HDMI-A-0 --left-of DisplayPort-2",
 		"xrandr --output HDMI-A-0 --primary",
-		"pacmd set-default-sink alsa_output.pci-0000_03_00.1.hdmi-stereo", // this needs to happen last, after the display is turned back on, because the sink name changes when the display is off and the index increments each time too.  alsa_output.pci-0000_03_00.1.hdmi-stereo-extra3
+		"wpctl set-default 53",
+		//		"pacmd set-default-sink alsa_output.pci-0000_03_00.1.hdmi-stereo", // this needs to happen last, after the display is turned back on, because the sink name changes when the display is off and the index increments each time too.  alsa_output.pci-0000_03_00.1.hdmi-stereo-extra3
 	}
 	return RunCommands(commands)
 }
 
 func NormalMode() error {
 	commands := []string{
-		"pacmd set-default-sink alsa_output.pci-0000_00_1f.3.analog-stereo",
+		//		"pacmd set-default-sink alsa_output.pci-0000_00_1f.3.analog-stereo",
+		"wpctl set-default 33",
 		"xrandr --output DisplayPort-2 --primary",
 		"xrandr --output HDMI-A-0 --off",
 	}
