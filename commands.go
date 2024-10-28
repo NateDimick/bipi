@@ -57,7 +57,9 @@ func StartSteamBigPicture() {
 		}
 	}
 	// then, open steam in big picture mode
-	exec.Command("steam", "steam://open/bigpicture").Run()
+	RunCommands([]string{
+		"steam steam://open/bigpicture &",
+	})
 }
 
 func getSteamPID() string {

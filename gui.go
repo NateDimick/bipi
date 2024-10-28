@@ -16,10 +16,16 @@ func RunUI(window *app.Window) error {
 	var ops op.Ops
 	var systemSwitch widget.Bool
 	var steamButton widget.Clickable
+	var resetButton widget.Clickable
 	for {
 		switch e := window.Event().(type) {
 		case app.FrameEvent:
 			gtx := app.NewContext(&ops, e)
+			if resetButton.Clicked(gtx) {
+				if !systemSwitch.Value {
+					NormalMode()
+				}
+			}
 			if steamButton.Clicked(gtx) {
 				StartSteamBigPicture()
 			}
@@ -36,6 +42,7 @@ func RunUI(window *app.Window) error {
 				}
 			}
 			ss := material.Switch(theme, &systemSwitch, "Switch System Settings")
+			rb := material.Button(theme, &resetButton, "Normal Mode Manual Reset")
 			sb := material.Button(theme, &steamButton, "Start Steam Big Picture")
 			layout.Flex{
 				Axis:      layout.Vertical,
@@ -52,6 +59,9 @@ func RunUI(window *app.Window) error {
 						layout.Rigid(ss.Layout),
 						layout.Rigid(material.Body2(theme, "Big Picture Mode").Layout),
 					)
+				}),
+				layout.Rigid(func(gtx layout.Context) layout.Dimensions {
+					return layout.Inset{Left: unit.Dp(10), Right: unit.Dp(10)}.Layout(gtx, rb.Layout)
 				}),
 				layout.Rigid(func(gtx layout.Context) layout.Dimensions {
 					return layout.Inset{Left: unit.Dp(10), Right: unit.Dp(10)}.Layout(gtx, sb.Layout)
