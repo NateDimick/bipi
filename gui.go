@@ -27,7 +27,7 @@ func RunUI(window *app.Window) error {
 				}
 			}
 			if steamButton.Clicked(gtx) {
-				StartSteamBigPicture()
+				go StartSteamBigPicture()
 			}
 			if systemSwitch.Update(gtx) {
 				fmt.Println("switch toggle", systemSwitch.Value)

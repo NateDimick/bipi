@@ -58,7 +58,7 @@ func StartSteamBigPicture() {
 	}
 	// then, open steam in big picture mode
 	RunCommands([]string{
-		"steam steam://open/bigpicture &",
+		"steam steam://open/bigpicture",
 	})
 }
 
