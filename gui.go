@@ -15,6 +15,8 @@ func RunUI(window *app.Window) error {
 	theme := material.NewTheme()
 	var ops op.Ops
 	var systemSwitch widget.Bool
+	var autoLaunch widget.Bool
+	autoLaunch.Value = true
 	var steamButton widget.Clickable
 	var resetButton widget.Clickable
 	for {
@@ -35,6 +37,9 @@ func RunUI(window *app.Window) error {
 					var toggleErr error
 					if systemSwitch.Value {
 						toggleErr = BigPictureMode()
+						if autoLaunch.Value {
+							go StartSteamBigPicture()
+						}
 					} else {
 						toggleErr = NormalMode()
 					}
@@ -44,6 +49,7 @@ func RunUI(window *app.Window) error {
 				}()
 			}
 			ss := material.Switch(theme, &systemSwitch, "Switch System Settings")
+			al := material.CheckBox(theme, &autoLaunch, "Launch Steam with Big Picture Mode Toggle")
 			rb := material.Button(theme, &resetButton, "Normal Mode Manual Reset")
 			sb := material.Button(theme, &steamButton, "Start Steam Big Picture")
 			layout.Flex{
@@ -61,6 +67,9 @@ func RunUI(window *app.Window) error {
 						layout.Rigid(ss.Layout),
 						layout.Rigid(material.Body2(theme, "Big Picture Mode").Layout),
 					)
+				}),
+				layout.Rigid(func(gtx layout.Context) layout.Dimensions {
+					return layout.Center.Layout(gtx, al.Layout)
 				}),
 				layout.Rigid(func(gtx layout.Context) layout.Dimensions {
 					return layout.Inset{Left: unit.Dp(10), Right: unit.Dp(10)}.Layout(gtx, rb.Layout)

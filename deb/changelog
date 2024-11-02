@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - add roku commands to toggle
 - turn off hdmi on startup
+- add steam auto launch option on big picture activation
 
 ## [0.3]
 
