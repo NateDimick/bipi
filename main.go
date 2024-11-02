@@ -8,6 +8,9 @@ import (
 )
 
 func main() {
+	RunCommands([]string{
+		"xrandr --output HDMI-A-0 --off",
+	})
 	go func() {
 		window := new(app.Window)
 		window.Option(app.Title("Bipi"))

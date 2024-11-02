@@ -18,7 +18,7 @@ func BigPictureMode() error {
 		"wpctl set-default 53",
 		//		"pacmd set-default-sink alsa_output.pci-0000_03_00.1.hdmi-stereo", // this needs to happen last, after the display is turned back on, because the sink name changes when the display is off and the index increments each time too.  alsa_output.pci-0000_03_00.1.hdmi-stereo-extra3
 	}
-	return RunCommands(commands)
+	return errors.Join(RunCommands(commands), TurnOn())
 }
 
 func NormalMode() error {
@@ -28,7 +28,7 @@ func NormalMode() error {
 		"xrandr --output DisplayPort-2 --primary",
 		"xrandr --output HDMI-A-0 --off",
 	}
-	return RunCommands(commands)
+	return errors.Join(RunCommands(commands), TurnOff())
 }
 
 func RunCommands(cmds []string) error {
@@ -66,6 +66,7 @@ func getSteamPID() string {
 	stdout, err := exec.Command("bash", "-c", "pidof steam || echo 'ok'").Output()
 	if err != nil {
 		// TODO
+		return ""
 	}
 	return strings.TrimSpace(string(stdout))
 }

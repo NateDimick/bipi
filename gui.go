@@ -23,23 +23,25 @@ func RunUI(window *app.Window) error {
 			gtx := app.NewContext(&ops, e)
 			if resetButton.Clicked(gtx) {
 				if !systemSwitch.Value {
-					NormalMode()
+					go NormalMode()
 				}
 			}
 			if steamButton.Clicked(gtx) {
 				go StartSteamBigPicture()
 			}
 			if systemSwitch.Update(gtx) {
-				fmt.Println("switch toggle", systemSwitch.Value)
-				var toggleErr error
-				if systemSwitch.Value {
-					toggleErr = BigPictureMode()
-				} else {
-					toggleErr = NormalMode()
-				}
-				if toggleErr != nil {
-					fmt.Println(toggleErr.Error())
-				}
+				go func() {
+					fmt.Println("switch toggle", systemSwitch.Value)
+					var toggleErr error
+					if systemSwitch.Value {
+						toggleErr = BigPictureMode()
+					} else {
+						toggleErr = NormalMode()
+					}
+					if toggleErr != nil {
+						fmt.Println(toggleErr.Error())
+					}
+				}()
 			}
 			ss := material.Switch(theme, &systemSwitch, "Switch System Settings")
 			rb := material.Button(theme, &resetButton, "Normal Mode Manual Reset")
