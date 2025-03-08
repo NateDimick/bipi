@@ -22,6 +22,7 @@ func FindRoku() string {
 }
 
 func TurnOn() error {
+	// FUTURE: send libcec command to turn tv on
 	rokuIP := FindRoku()
 	if rokuIP == "" {
 		return errors.New("no roku tv found")

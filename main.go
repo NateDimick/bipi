@@ -9,7 +9,7 @@ import (
 
 func main() {
 	RunCommands([]string{
-		"xrandr --output HDMI-A-0 --off",
+		"xrandr --output DisplayPort-1 --off",
 	})
 	go func() {
 		window := new(app.Window)
