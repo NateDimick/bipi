@@ -33,3 +33,9 @@ Why not use a dedicated pc for big picture like a htpc? I'm not made of money.
 [GUI With Gio](https://jonegil.github.io/gui-with-gio/)
 [Roku ECP](https://developer.roku.com/docs/developer-program/dev-tools/external-control-api.md)
 [Launch ubuntu app on login](https://askubuntu.com/questions/48321/how-do-i-start-applications-automatically-on-login)
+
+## Future: auto power on with libcec
+
+[libcec repo](https://github.com/Pulse-Eight/libcec)
+
+hdmi-cec allows devices to turn on tvs (your nintendo switch can do this when you power it on, for example). to get cec to work with a pc, however, just installing libcec isn't enough - a cec adapter would be required and those run for more than $40. [Here's one](https://www.pulse-eight.com/p/104/usb-hdmi-cec-adapter) from the same people who developed libcec.
